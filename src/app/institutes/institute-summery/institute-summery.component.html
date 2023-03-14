@@ -1,0 +1,134 @@
+<div class="flex justify-center md:px-4">
+  <div class="w-full bg-white rounded-lg border border-gray-200 shadow-md px-2 pt-4 pb-5 md:px-4">
+    <ol class="pt-2 pb-5 flex items-center justify-center w-full text-sm font-medium text-center text-gray-500 sm:text-base">
+      <li
+        class="flex md:w-full items-center material-purple sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <i class="pi pi-check-circle" style="font-size: 1.2rem"></i>
+         <span class="hidden lg:inline-flex lg:ml-2">Select&nbsp;Exam</span>
+        </span>
+      </li>
+      <li
+        class="flex md:w-full items-center material-purple sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <i class="pi pi-check-circle" style="font-size: 1.2rem"></i>
+         <span class="hidden lg:inline-flex lg:ml-2">Applicants&nbsp;Info</span>
+        </span>
+      </li>
+      <li
+        class="flex md:w-full items-center material-purple sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <span class="flex items-center justify-center rounded-full text-white material-purple-bg"
+                style="width:1.5rem; height: 1.5rem">3
+          </span>
+          <span class="hidden lg:inline-flex lg:ml-2 font-bold">Summery&nbsp;&&nbsp;Payment</span>
+        </span>
+      </li>
+      <li class="flex items-center">
+        <span class="flex items-center justify-center rounded-full text-white bg-gray-400"
+              style="width:1.5rem; height: 1.5rem">4</span>
+        <span class="hidden lg:inline-flex sm:ml-2">Confirmation</span>
+      </li>
+    </ol>
+    <div class="flex justify-center">
+      <div class="space-y-6 w-full">
+        <h5 class="sm:text-xl font-medium text-gray-900 text-center">Step 03 - Summery & Payment</h5>
+        <div class="grid">
+          <div class="col-12">
+            <p-table [value]="applicants"
+                     [tableStyle]="{'min-width': '60rem'}"
+                     [paginator]="true"
+                     [rows]="10"
+                     styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped text-sm">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th class="text-center" pSortableColumn="name" rowspan="2">Full Name</th>
+                  <th class="text-center" pSortableColumn="medium" rowspan="2">Medium</th>
+                  <th class="text-center" pSortableColumn="gender" rowspan="2">Gender</th>
+                  <th class="text-center" pSortableColumn="Applicant_Type" rowspan="2">Applicant Type</th>
+                  <th class="text-center" rowspan="1" colspan="2">Only for Referred Applicants</th>
+                  <th class="text-center" pSortableColumn="subjects" rowspan="2">Subject(s)</th>
+                  <th class="text-center" pSortableColumn="payment" rowspan="2">Payment(LKR)</th>
+                  <th class="text-center" rowspan="2">Delete</th>
+                </tr>
+                <tr>
+                  <th class="text-center" pSortableColumn="year">Referred Year</th>
+                  <th class="text-center" pSortableColumn="index">Referred Index</th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-applicant>
+                <tr>
+                  <td>{{applicant.name}}</td>
+                  <td class="text-center">{{applicant.medium}}</td>
+                  <td class="text-center">{{applicant.gender}}</td>
+                  <td class="text-center">{{applicant.Applicant_Type}}</td>
+                  <td class="text-center">{{applicant.year}}</td>
+                  <td class="text-center">{{applicant.index}}</td>
+                  <td class="text-center">{{applicant.subjects}}</td>
+                  <td class="text-center">{{applicant.payment}}</td>
+                  <td>
+                    <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
+                  </td>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="footer">
+                <tr>
+                  <td colspan="7" class="text-center">Total Payment</td>
+                  <td colspan="2" class="text-center">LKR 1200.00</td>
+                </tr>
+              </ng-template>
+            </p-table>
+
+
+          </div>
+          <div class="col-12 pt-6">
+            <p-fileUpload
+              name="demo[]"
+              chooseLabel="Click here to Upload Payment Slip"
+              url="./upload.php"
+              (onUpload)="onUpload($event)"
+              accept="image/*">
+              <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                  <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+              </ng-template>
+            </p-fileUpload>
+
+
+<!--            <p-fileUpload-->
+<!--              #paymentSlip-->
+<!--              chooseIcon="pi pi-cloud-upload"-->
+<!--              chooseLabel="Upload"-->
+<!--              mode="basic"-->
+<!--              name="paymentSlip[]"-->
+<!--              [customUpload]="true"-->
+<!--              [auto]="true">-->
+<!--            </p-fileUpload>-->
+          </div>
+          <div class="col-12 mt-4 text-center space-x-4">
+            <button
+              pButton
+              type="button"
+              label="Back"
+              class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised p-button-text"
+              pRipple
+              routerLink="/institutes/daham-pasal">
+            </button>
+            <button
+              pButton
+              type="submit"
+              label="Next"
+              routerLink="/institutes/confirmation"
+              class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised"
+              pRipple>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

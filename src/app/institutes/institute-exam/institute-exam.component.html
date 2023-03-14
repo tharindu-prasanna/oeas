@@ -1,0 +1,81 @@
+<div class="flex justify-center md:px-4">
+  <div class="w-full bg-white rounded-lg border border-gray-200 shadow-md px-2 pt-4 pb-5 md:px-4">
+    <ol class="pt-2 pb-5 flex items-center justify-center w-full text-sm font-medium text-center text-gray-500 sm:text-base">
+      <li
+        class="flex md:w-full items-center material-purple sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <span class="flex items-center justify-center rounded-full text-white material-purple-bg"
+                style="width:1.5rem; height: 1.5rem">1</span>
+          <span class="hidden lg:inline-flex lg:ml-2 font-bold">Select&nbsp;Exam</span>
+        </span>
+      </li>
+      <li
+        class="flex md:w-full items-center sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <span class="flex items-center justify-center rounded-full text-white bg-gray-400"
+                style="width:1.5rem; height: 1.5rem">2</span>
+             <span class="hidden lg:inline-flex sm:ml-2">Applicants&nbsp;Info</span>
+        </span>
+      </li>
+      <li
+        class="flex md:w-full items-center sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <span class="flex items-center justify-center rounded-full text-white bg-gray-400"
+                style="width:1.5rem; height: 1.5rem">3</span>
+             <span class="hidden lg:inline-flex sm:ml-2">Summery&nbsp;&&nbsp;Payment</span>
+        </span>
+      </li>
+      <li class="flex items-center">
+        <span class="flex items-center justify-center rounded-full text-white bg-gray-400"
+              style="width:1.5rem; height: 1.5rem">3</span>
+        <span class="hidden lg:inline-flex sm:ml-2">Confirmation</span>
+      </li>
+    </ol>
+    <div class="flex justify-center">
+      <div class="w-full max-w-2xl">
+        <form class="space-y-6" [formGroup]="instituteExamForm" (ngSubmit)="onSubmit()">
+          <h5 class="sm:text-xl font-medium text-gray-900 text-center">Step 01 - Select an Examination to Apply</h5>
+          <div class="grid">
+            <div class="col-12">
+                <span class="p-float-label">
+                  <p-dropdown
+                    class="p-inputtext-sm"
+                    inputId="exam_code"
+                    [style]="{ width: '100%' }"
+                    [options]="exams"
+                    optionLabel="name"
+                    optionValue="code"
+                    placeholder="Select an exam to apply"
+                    (onChange)="onExamChange()"
+                    formControlName="exam_code">
+                  </p-dropdown>
+                  <label>Select an examination to apply</label>
+                </span>
+            </div>
+            <div class="col-12 mt-4 text-center space-x-4">
+              <button
+                pButton
+                type="button"
+                label="Back"
+                class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised p-button-text"
+                pRipple
+                routerLink="/institutes">
+              </button>
+              <button
+                pButton
+                type="submit"
+                label="Next"
+                class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised"
+                pRipple
+                [disabled]="instituteExamForm.invalid">
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

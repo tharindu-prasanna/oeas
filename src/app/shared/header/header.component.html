@@ -1,0 +1,59 @@
+<div class="relative">
+  <div class="mx-auto max-w-8xl">
+    <div class="flex items-center">
+      <img routerLink="/" class="w-auto cursor-pointer" [src]="logo" alt="doe">
+    </div>
+  </div>
+  <nav class="bg-white px-2 sm:px-4 max-w-8xl w-full md:border-b border-gray-200">
+    <div class="container flex flex-wrap justify-start md:justify-center items-center mx-auto">
+      <div class="flex md:order-2">
+        <button data-collapse-toggle="navbar-cta" type="button"
+                class="inline-flex justify-center items-center p-2 mt-2 text-md text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
+                aria-controls="navbar-cta" aria-expanded="false">
+          <span class="sr-only">Open main menu</span>
+          <i class="pi pi-bars"></i>
+        </button>
+      </div>
+      <div class="hidden justify-between items-center w-full md:flex md:w-auto md:order-1" id="navbar-cta">
+        <ul
+          class="flex flex-col p-3 mt-4 bg-gray-50 rounded-lg border border-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-md md:font-medium md:border-0 md:bg-white">
+          <li>
+            <a routerLink="/"
+               routerLinkActive="md:bg-transparent material-purple-bg md:text-indigo-600 text-slate-50"
+               [routerLinkActiveOptions]="{exact: true}"
+               class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-blue-800 md:p-0"
+               aria-current="page">Home</a>
+          </li>
+          <li>
+            <a href="https://apps.exams.gov.lk/" target="_blank"
+               class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-blue-800 md:p-0">
+              Exam Admission Cards
+            </a>
+          </li>
+          <li>
+            <a href="https://doenets.lk/examresults" target="_blank"
+               class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-blue-800 md:p-0">
+              Exam Results
+            </a>
+          </li>
+          <li>
+            <a href="https://doenets.lk/examcalendar" target="_blank"
+               class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-blue-800 md:p-0">
+              Exam Calender
+            </a>
+          </li>
+          <li>
+            <a href="https://doenets.lk/contactus" target="_blank"
+               class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-blue-800 md:p-0">Contact
+              Us</a>
+          </li>
+          <li *ngIf="signedInStatus">
+            <a (click)="onSignOut()"
+               class="block py-2 pr-4 pl-3 rounded md:bg-transparent md:hover:bg-transparent md:hover:text-blue-800 md:p-0 vertically-center hover:cursor-pointer">Sign
+              Out</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

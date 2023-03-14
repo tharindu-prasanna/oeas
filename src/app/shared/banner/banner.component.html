@@ -1,0 +1,12 @@
+<div *ngIf="displayBanner" class="bg-gray-800 text-gray-100 p-2 flex justify-between lg:justify-center items-center flex-wrap">
+  <div class="font-bold mr-8">Latest!</div>
+  <div class="items-center hidden lg:flex">
+    <span class="line-height-3">Online application calling for Daham pasal examination.</span>
+  </div>
+  <a class="flex items-center ml-2 mr-8">
+    <a class="text-white" href="#"><span class="underline font-bold">Learn More</span></a>
+  </a>
+  <a (click)="closeBanner()" pRipple class="flex items-center no-underline justify-center rounded-full text-gray-50 hover:bg-gray-700 cursor-pointer transition-colors transition-duration-150" style="width:2rem; height: 2rem">
+    <i class="pi pi-times"></i>
+  </a>
+</div>

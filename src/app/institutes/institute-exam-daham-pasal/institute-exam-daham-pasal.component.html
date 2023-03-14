@@ -1,0 +1,289 @@
+<div class="flex justify-center md:px-4">
+  <div class="w-full bg-white rounded-lg border border-gray-200 shadow-md px-2 pt-4 pb-5 md:px-4">
+    <ol class="pt-2 pb-5 flex items-center justify-center w-full text-sm font-medium text-center text-gray-500 sm:text-base">
+      <li
+        class="flex md:w-full items-center material-purple sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <i class="pi pi-check-circle" style="font-size: 1.2rem"></i>
+         <span class="hidden lg:inline-flex lg:ml-2">Select&nbsp;Exam</span>
+        </span>
+      </li>
+      <li
+        class="flex md:w-full items-center material-purple sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <span class="flex items-center justify-center rounded-full text-white material-purple-bg"
+                style="width:1.5rem; height: 1.5rem">2
+          </span>
+          <span class="hidden lg:inline-flex lg:ml-2 font-bold">Applicants&nbsp;Info</span>
+        </span>
+      </li>
+      <li
+        class="flex md:w-full items-center sm:after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-300 after:border-1 after:hidden sm:after:inline-block after:mx-3 xl:after:mx-4">
+        <span
+          class="flex items-center after:content-['/'] sm:after:hidden after:mx-2 after:font-light after:text-gray-200">
+          <span class="flex items-center justify-center rounded-full text-white bg-gray-400"
+                style="width:1.5rem; height: 1.5rem">3</span>
+             <span class="hidden lg:inline-flex sm:ml-2">Summery&nbsp;&&nbsp;Payment</span>
+        </span>
+      </li>
+      <li class="flex items-center">
+        <span class="flex items-center justify-center rounded-full text-white bg-gray-400"
+              style="width:1.5rem; height: 1.5rem">4</span>
+        <span class="hidden lg:inline-flex sm:ml-2">Confirmation</span>
+      </li>
+    </ol>
+    <div class="flex justify-center">
+      <div class="w-full max-w-2xl">
+        <form class="space-y-6" [formGroup]="instituteExamApplicantsForm" (ngSubmit)="onSubmit()">
+          <h5 class="sm:text-xl font-medium text-gray-900 text-center">Step 02 - Details of Exams & Exam Applicants</h5>
+          <div class="grid space-y-4">
+            <div class="col-12">
+                <span class="p-float-label">
+                  <p-dropdown
+                    class="p-inputtext-sm"
+                    inputId="town_number"
+                    [style]="{ width: '100%' }"
+                    [options]="exam_towns"
+                    optionLabel="town_name"
+                    optionValue="town_number"
+                    placeholder="Select exam town"
+                    formControlName="town_number">
+                  </p-dropdown>
+                  <label>Select exam town</label>
+                </span>
+            </div>
+            <div class="col-12">
+              <p-fieldset legend="Section A - Applicants appearing for the exam for the first time">
+                <div class="data-sheet">
+                  <button
+                    pButton
+                    label="Click here to download template data sheet for filling applicant details"
+                    class="p-button-sm text-sm p-button-raised w-full"
+                    icon="pi pi-cloud-download"
+                    pRipple>
+                  </button>
+                  <p-divider></p-divider>
+                  <p-fileUpload
+                    [disabled]="secAFileUploadBtnStatus"
+                    #fileUploadA
+                    [chooseIcon]="secAFileUploadBtnIcon"
+                    [chooseLabel]="secAFileUploadBtnLabel"
+                    mode="basic"
+                    name="uploadFileA[]"
+                    [customUpload]="true"
+                    [auto]="true"
+                    (uploadHandler)="onSecAFileChange($event, fileUploadA)">
+                  </p-fileUpload>
+
+                  <div class="pl-1 pt-1" *ngIf="errorMessageA">
+                    <span class="p-error text-sm block">{{errorMessageA}}</span>
+                  </div>
+                  <div class="pl-1 py-3" *ngIf="errorsA.length > 0">
+                    <span class="p-error text-sm block">Following error(s) detected while validating data sheet.</span>
+                    <span
+                      class="p-error text-sm block">Please resolve the following error(s) & upload the data sheet again.</span>
+                  </div>
+
+                  <p-table *ngIf="errorsA.length > 0"
+                           [paginator]="true"
+                           [rows]="10"
+                           [value]="errorsA"
+                           styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+                           [scrollable]="true"
+                           scrollHeight="500px"
+                           [tableStyle]="{'min-width': '5rem'}">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" style="width:25%">Row No.</th>
+                        <th>Error Details</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-error>
+                      <tr>
+                        <td class="text-center">{{error.row}}</td>
+                        <td>{{error.message}}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                  <div *ngIf="errorsA.length > 0">
+                    <p-divider></p-divider>
+                    <button
+                      (click)="onSecAClearErrors()"
+                      pButton
+                      pRipple
+                      type="button"
+                      label="Click here to clear selected file and error messages"
+                      icon="pi pi-times"
+                      class="p-button-raised p-button-danger p-button-sm text-sm w-full">
+                    </button>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+            <div class="col-12">
+              <p-fieldset legend="Section B - Applicants appearing for the exam more than once and external applicants">
+                <div class="data-sheet">
+                  <button
+                    pButton
+                    label="Click here to download template data sheet for filling applicant details"
+                    class="p-button-sm p-button-help text-sm p-button-raised w-full"
+                    icon="pi pi-cloud-download"
+                    pRipple>
+                  </button>
+                  <p-divider></p-divider>
+                  <p-fileUpload
+                    [disabled]="secBFileUploadBtnStatus"
+                    #fileUploadB
+                    [chooseIcon]="secBFileUploadBtnIcon"
+                    [chooseLabel]="secBFileUploadBtnLabel"
+                    mode="basic"
+                    name="uploadFileB[]"
+                    [customUpload]="true"
+                    [auto]="true"
+                    (uploadHandler)="onSecBFileChange($event, fileUploadB)">
+                  </p-fileUpload>
+
+                  <div class="pl-1 pt-1" *ngIf="errorMessageB">
+                    <span class="p-error text-sm block">{{errorMessageB}}</span>
+                  </div>
+                  <div class="pl-1 py-3" *ngIf="errorsB.length > 0">
+                    <span class="p-error text-sm block">Following error(s) detected while validating data sheet.</span>
+                    <span
+                      class="p-error text-sm block">Please resolve the following error(s) & upload the data sheet again.</span>
+                  </div>
+
+                  <p-table *ngIf="errorsB.length > 0"
+                           [paginator]="true"
+                           [rows]="10"
+                           [value]="errorsB"
+                           styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+                           [scrollable]="true"
+                           scrollHeight="500px"
+                           [tableStyle]="{'min-width': '5rem'}">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" style="width:25%">Row No.</th>
+                        <th>Error Details</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-error>
+                      <tr>
+                        <td class="text-center">{{error.row}}</td>
+                        <td>{{error.message}}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                  <div *ngIf="errorsB.length > 0">
+                    <p-divider></p-divider>
+                    <button
+                      (click)="onSecBClearErrors()"
+                      pButton
+                      pRipple
+                      type="button"
+                      label="Click here to clear selected file and error messages"
+                      icon="pi pi-times"
+                      class="p-button-raised p-button-danger p-button-sm text-sm w-full">
+                    </button>
+                  </div>
+                </div>
+              </p-fieldset>
+            </div>
+            <div class="col-12">
+              <p-fieldset legend="Section C - Applicants appearing for the exam to pass a referred subject">
+                <div class="data-sheet">
+                  <button
+                    pButton
+                    label="Click here to download template data sheet for filling applicant details"
+                    class="p-button-sm p-button-warning text-sm p-button-raised w-full"
+                    icon="pi pi-cloud-download"
+                    pRipple>
+                  </button>
+                  <p-divider></p-divider>
+                  <p-fileUpload
+                    [disabled]="secCFileUploadBtnStatus"
+                    (onProgress)="onUploading()"
+                    #fileUploadC
+                    [chooseIcon]="secCFileUploadBtnIcon"
+                    [chooseLabel]="secCFileUploadBtnLabel"
+                    mode="basic"
+                    name="uploadFileC[]"
+                    [customUpload]="true"
+                    [auto]="true"
+                    (uploadHandler)="onSecCFileChange($event, fileUploadC)">
+                  </p-fileUpload>
+
+                  <div class="pl-1 pt-1" *ngIf="errorMessageC">
+                    <span class="p-error text-sm block">{{errorMessageC}}</span>
+                  </div>
+                  <div class="pl-1 py-3" *ngIf="errorsC.length > 0">
+                    <span class="p-error text-sm block">Following error(s) detected while validating data sheet.</span>
+                    <span
+                      class="p-error text-sm block">Please resolve the following error(s) & upload the data sheet again.</span>
+                  </div>
+
+                  <p-table *ngIf="errorsC.length > 0"
+                           [paginator]="true"
+                           [rows]="10"
+                           [value]="errorsC"
+                           styleClass="p-datatable-sm p-datatable-gridlines p-datatable-striped"
+                           [scrollable]="true"
+                           scrollHeight="500px"
+                           [tableStyle]="{'min-width': '5rem'}">
+                    <ng-template pTemplate="header">
+                      <tr>
+                        <th class="text-center" style="width:25%">Row No.</th>
+                        <th>Error Details</th>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-error>
+                      <tr>
+                        <td class="text-center">{{error.row}}</td>
+                        <td>{{error.message}}</td>
+                      </tr>
+                    </ng-template>
+                  </p-table>
+
+                  <div *ngIf="errorsC.length > 0">
+                    <p-divider></p-divider>
+                    <button
+                      (click)="onSecCClearErrors()"
+                      pButton
+                      pRipple
+                      type="button"
+                      label="Click here to clear selected file and error messages"
+                      icon="pi pi-times"
+                      class="p-button-raised p-button-danger p-button-sm text-sm w-full">
+                    </button>
+                  </div>
+
+                </div>
+              </p-fieldset>
+            </div>
+            <div class="col-12 mt-4 text-center space-x-4">
+              <button
+                pButton
+                type="button"
+                label="Back"
+                class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised p-button-text"
+                pRipple
+                routerLink="/institutes/select-exam">
+              </button>
+              <button
+                pButton
+                type="submit"
+                label="Next"
+                class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised"
+                pRipple
+                [disabled]="instituteExamApplicantsForm.invalid || errorsA.length > 0 || errorsB.length > 0 || errorsC.length > 0">
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

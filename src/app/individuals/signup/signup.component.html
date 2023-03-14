@@ -1,0 +1,125 @@
+<div class="flex justify-center">
+  <div class="w-full max-w-xl bg-white rounded-lg border border-gray-200 shadow-md px-2 pt-4 pb-5 sm:px-4">
+    <form class="space-y-6" [formGroup]="individualSignupForm" (ngSubmit)="onSignup()">
+      <h5 class="sm:text-xl font-medium text-gray-900 text-center">Create an Account</h5>
+      <div class="grid">
+        <div class="col-12">
+            <span class="p-float-label">
+              <input type="text" id="nic" pInputText class="p-inputtext-sm" formControlName="nic"
+                     placeholder="Enter your N.I.C. No." [style]="{ width: '100%' }"/>
+              <label for="nic">N.I.C. No.</label>
+              <div *ngIf="this.individualSignupForm.controls['nic'].dirty && individualSignupForm.controls['nic'].errors">
+                <small
+                  *ngIf="individualSignupForm.controls['nic'].errors['required'] || individualSignupForm.controls['nic'].errors['whitespace']"
+                  class="p-error">This field is required.</small>
+              </div>
+            </span>
+        </div>
+        <div class="col-12">
+          <span class="p-float-label">
+            <input type="text" id="email" pInputText class="p-inputtext-sm" formControlName="email"
+                   placeholder="Enter your email address" [style]="{ width: '100%' }"/>
+            <label for="email">Email address</label>
+            <div *ngIf="this.individualSignupForm.controls['email'].dirty && individualSignupForm.controls['email'].errors">
+              <small *ngIf="individualSignupForm.controls['email'].errors['required']" class="p-error">This field is required.</small>
+              <small *ngIf="individualSignupForm.controls['email'].errors['email']" class="p-error">Invalid email address.</small>
+            </div>
+          </span>
+          <small class="text-gray-600">Account activation link will be sent to this email.</small>
+        </div>
+        <div class="col-12">
+          <span class="p-float-label">
+            <input type="password" id="password" pInputText class="p-inputtext-sm" formControlName="password"
+                   placeholder="Enter a password with minimum 8 characters" [style]="{ width: '100%' }"/>
+            <label for="password">Password</label>
+          </span>
+          <div *ngIf="this.individualSignupForm.controls['password'].dirty && individualSignupForm.controls['password'].errors">
+            <small *ngIf="individualSignupForm.controls['password'].errors['required']" class="p-error">This field is required.</small>
+            <small *ngIf="individualSignupForm.controls['password'].errors['minlength']" class="p-error">Password must be at least 8
+              characters long.</small>
+          </div>
+        </div>
+        <div class="col-12">
+          <span class="p-float-label">
+            <input type="password" id="confirmPassword" pInputText class="p-inputtext-sm" formControlName="confirmPassword"
+                   placeholder="Re-enter password" [style]="{ width: '100%' }"/>
+            <label for="confirmPassword">Confirm password</label>
+          </span>
+          <div
+            *ngIf="this.individualSignupForm.controls['confirmPassword'].dirty && individualSignupForm.controls['confirmPassword'].errors">
+            <small *ngIf="individualSignupForm.controls['confirmPassword'].errors['required']" class="p-error">This field is
+              required.</small>
+            <small *ngIf="individualSignupForm.controls['confirmPassword'].errors['passwordNotMatch']" class="p-error">Password & Confirm
+              password must be the same.</small>
+          </div>
+        </div>
+        <div class="col-12 field-checkbox">
+          <div class="mr-2">
+            <p-checkbox formControlName="termsConditions" inputId="termsAndConditions" class="terms-checkbox"
+                        value="agreed"></p-checkbox>
+          </div>
+          <div>
+            <label class="cursor-pointer" for="termsAndConditions">I have read and agreed with the <span pRipple
+                                                                                                         (click)="onTermsAndConditions()"
+                                                                                                         class="contact-email hover:underline material-purple">terms & conditions.</span></label>
+          </div>
+        </div>
+        <div class="col-12 text-center space-x-4">
+          <button
+            pButton
+            type="button"
+            label="Back"
+            class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised p-button-text"
+            pRipple
+            routerLink="/individuals">
+          </button>
+          <button
+            pButton
+            type="submit"
+            label="Sign Up"
+            class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised"
+            pRipple
+            [disabled]="individualSignupForm.invalid">
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!--Terms & Conditions Dialog-->
+<p-dialog header="Terms and Conditions"
+          [(visible)]="showIndividualSignupTerms"
+          [breakpoints]="{'960px': '75vw', '640px': '100vw'}"
+          [style]="{width: '50vw'}"
+          [responsive]="true"
+          [draggable]="false"
+          [resizable]="false">
+  <div class="space-y-4 text-justify">
+    <p>
+      Examination admissions are the property of the Government of Sri Lanka, and copying, keeping, posting on a website
+      or social media networks, or otherwise publicizing the examination admissions which are not belong to the
+      candidate without proper permission is strictly prohibited and is a punishable offense.
+    </p>
+    <p>
+      විභාග ප්‍රවේශපත්‍ර ශ්‍රී ලංකා රජය සතු දේපලක් වන අතර, නිසි අවසරයකින් තොරව අයදුම්කරුගේ නොවන විභාග ප්‍රවේශපත්‍ර උපුටා
+      ගැනීම, ළඟ තබා ගැනීම, වෙබ් අඩවියක හෝ සමාජ මාධ්‍ය ජාලවල පල කිරීම හෝ වෙනත් ආකාරයකින් ප්‍රසිද්ධ කිරීම සපුරා තහනම් වන
+      අතර, දඬුවම් ලැබිය හැකි වරදකි.
+    </p>
+    <p class="text-sm">
+      தேர்வுகள் அனுமதி அட்டைகள் இலங்கை அரசாங்கத்தின் சொத்தாகும். உரிய அனுமதியின்றி பரீட்சார்த்திகளுக்கு உரியதல்லாத
+      தேர்வுகள் அனுமதி அட்டைகள் பிரதிசெய்தல், தம்வசம் வைத்திருத்தல், இணையத்தளமொன்றிற்குள்ளோ அல்லது சமூக வலைத்தளங்களிலோ
+      பதிவேற்றம் செய்தல் அல்லது வேறு வடிவங்களில் பிரசுரித்தல் என்பன முற்றாகத் தடைசெய்யப்பட்டுள்ளதுடன் தண்டனைக்குரிய
+      குற்றமுமாகும்.
+    </p>
+  </div>
+  <ng-template pTemplate="footer">
+    <button (click)="showIndividualSignupTerms=false"
+            label="Ok"
+            pButton
+            type="button"
+            class="p-button-sm w-1/5 text-sm p-button-raised p-button-text"
+            pRipple>
+    </button>
+  </ng-template>
+</p-dialog>

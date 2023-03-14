@@ -1,0 +1,41 @@
+<div class="flex justify-center">
+  <div class="w-full max-w-xl bg-white rounded-lg border border-gray-200 shadow-md px-2 pt-4 pb-5 md:px-4">
+    <form class="space-y-8" [formGroup]="individualExamForm" (ngSubmit)="onSubmit()">
+      <div>
+        <h5 class="mb-3 font-medium text-gray-900">Select an Examination to apply</h5>
+        <span class="p-float-label">
+          <p-dropdown
+            inputId="exam_code"
+            class="p-inputtext-sm"
+            [style]="{ width: '100%' }"
+            [options]="exams"
+            optionLabel="name"
+            optionValue="code"
+            placeholder="Select an exam to apply"
+            (onChange)="onExamChange()"
+            formControlName="exam_code">
+          </p-dropdown>
+          <label>Select an examination to apply</label>
+        </span>
+      </div>
+      <div class="flex justify-center space-x-4">
+        <button
+          pButton
+          type="button"
+          label="Back"
+          class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised p-button-text"
+          pRipple
+          routerLink="/">
+        </button>
+        <button
+          pButton
+          type="submit"
+          label="Sign In"
+          class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised"
+          pRipple
+          [disabled]="individualExamForm.invalid">
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

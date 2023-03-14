@@ -1,0 +1,61 @@
+<div class="flex justify-center">
+  <div class="w-full max-w-xl bg-white rounded-lg border border-gray-200 shadow-md px-2 pt-4 pb-5 md:px-4">
+    <form class="space-y-6" [formGroup]="signinForm" (ngSubmit)="onSignin()">
+      <h5 class="sm:text-xl font-medium text-gray-900 text-center">{{heading}}</h5>
+      <div class="grid">
+        <div class="col-12">
+                <span class="p-float-label">
+                  <input type="text" id="username" pInputText class="p-inputtext-sm" formControlName="username"
+                         [placeholder]="usernameFieldHeading" [style]="{ width: '100%' }"/>
+                  <label for="username">{{usernameFieldHeading}}</label>
+                </span>
+        </div>
+        <div class="col-12">
+          <span class="p-float-label">
+            <input type="password" id="password" pInputText class="p-inputtext-sm" formControlName="password" placeholder="Enter password"
+                   [style]="{ width: '100%' }"/>
+            <label for="password">Password</label>
+          </span>
+        </div>
+        <div class="col-12" *ngIf="errorMessage | async">
+          <span class="p-error pl-2.5 text-sm">{{errorMessage | async}}</span>
+        </div>
+        <div class="col-12 text-center md:flex md:justify-between text-sm">
+          <p class="text-gray-600">
+            Don’t have an account yet?
+            <a *ngIf="routePath === '/individuals/signin'"
+               routerLink="/individuals/signup"
+               class="font-medium material-purple hover:underline">
+              Sign up now!
+            </a>
+            <a *ngIf="routePath === '/institutes/signin'"
+               href="https://doenets.lk/contactus"
+               target="_blank"
+               class="font-medium material-purple hover:underline">
+              Contact us!
+            </a>
+          </p>
+          <a routerLink="/reset-password" class="font-medium hover:underline material-purple">Forgot password?</a>
+        </div>
+        <div class="col-12 mt-4 text-center space-x-4">
+          <button
+            pButton
+            type="button"
+            label="Back"
+            class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised p-button-text"
+            pRipple
+            routerLink="/">
+          </button>
+          <button
+            pButton
+            type="submit"
+            label="Sign In"
+            class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised"
+            pRipple
+            [disabled]="signinForm.invalid">
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

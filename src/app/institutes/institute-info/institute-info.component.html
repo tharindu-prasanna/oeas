@@ -1,0 +1,154 @@
+<div class="flex justify-center md:px-4">
+  <div class="w-full bg-white rounded-lg border border-gray-200 shadow-md px-2 pt-4 pb-5 md:px-4">
+    <div class="flex justify-center">
+      <div class="w-full max-w-2xl">
+        <form class="space-y-6" [formGroup]="instituteInfoForm" (ngSubmit)="onSubmit()">
+          <h5 class="sm:text-xl font-medium text-gray-900 text-center">Update Institute Details</h5>
+          <div class="grid">
+            <div class="col-12 md:col-3">
+              <div class="p-inputgroup">
+                  <span class="p-float-label">
+                    <input type="text" class="p-inputtext-sm" pInputText formControlName="institute_number" [style]="{ width: '100%' }"
+                           readOnly>
+                    <label>Institute number</label>
+                  </span>
+              </div>
+            </div>
+            <div class="col-12 md:col-9">
+              <div class="p-inputgroup">
+                  <span class="p-float-label">
+                    <input type="text" id="institute_name" class="p-inputtext-sm" pInputText formControlName="institute_name"
+                           placeholder="Enter institute name" [style]="{ width: '100%' }" [readOnly]="addressLine1Readonly" pAutoFocus
+                           [autofocus]="!addressLine1Readonly"/>
+                    <label for="institute_name">Institute name</label>
+                  </span>
+              </div>
+            </div>
+            <div class="col-12 md:col-6">
+              <div class="p-inputgroup">
+                  <span class="p-float-label">
+                    <input type="text" id="contact_fixed" class="p-inputtext-sm" pInputText formControlName="contact_fixed"
+                           placeholder="Enter fixed contact number" [style]="{ width: '100%' }" [readOnly]="contactFixedReadonly" pAutoFocus
+                           [autofocus]="!contactFixedReadonly"/>
+                    <label for="contact_fixed">Contact number (fixed)</label>
+                  </span>
+                <button *ngIf="contactFixedReadonly" type="button" pButton pRipple icon="pi pi-pencil"
+                        (click)="onContactFixedEdit()"></button>
+                <button *ngIf="!contactFixedReadonly" type="button" [hidden]="!contactFixedReadonly" pButton class="p-button-success"
+                        pRipple icon="pi pi-check" (click)="onContactFixedUpdate()"></button>
+                <button *ngIf="!contactFixedReadonly" type="button" hidden="hidden" pButton class="p-button-danger" pRipple
+                        icon="pi pi-times" (click)="onContactFixedCancel()"></button>
+              </div>
+            </div>
+            <div class="col-12 md:col-6">
+              <div class="p-inputgroup">
+                  <span class="p-float-label">
+                    <input type="text" id="contact_mobile" class="p-inputtext-sm" pInputText formControlName="contact_mobile"
+                           placeholder="Enter mobile contact number" [style]="{ width: '100%' }" [readOnly]="contactMobileReadonly"
+                           pAutoFocus [autofocus]="!contactMobileReadonly"/>
+                    <label for="contact_mobile">Contact number (mobile)</label>
+                  </span>
+                <button *ngIf="contactMobileReadonly" type="button" pButton pRipple icon="pi pi-pencil"
+                        (click)="onContactMobileEdit()"></button>
+                <button *ngIf="!contactMobileReadonly" type="button" [hidden]="!contactMobileReadonly" pButton class="p-button-success"
+                        pRipple icon="pi pi-check" (click)="onContactMobileUpdate()"></button>
+                <button *ngIf="!contactMobileReadonly" type="button" hidden="hidden" pButton class="p-button-danger" pRipple
+                        icon="pi pi-times" (click)="onContactMobileCancel()"></button>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="p-inputgroup">
+                  <span class="p-float-label">
+                    <input type="text" id="address_line1" class="p-inputtext-sm" pInputText formControlName="address_line1"
+                           placeholder="Enter address line 1" [style]="{ width: '100%' }" [readOnly]="addressLine1Readonly"
+                           pAutoFocus [autofocus]="!addressLine1Readonly"/>
+                    <label for="address_line1">Address line 1</label>
+                  </span>
+                <button *ngIf="addressLine1Readonly" type="button" pButton pRipple icon="pi pi-pencil"
+                        (click)="onAddressLine1Edit()"></button>
+                <button *ngIf="!addressLine1Readonly" type="button" [hidden]="!addressLine1Readonly" pButton class="p-button-success"
+                        pRipple icon="pi pi-check" (click)="onAddressLine1Update()"></button>
+                <button *ngIf="!addressLine1Readonly" type="button" hidden="hidden" pButton class="p-button-danger" pRipple
+                        icon="pi pi-times" (click)="onAddressLine1Cancel()"></button>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="p-inputgroup">
+                  <span class="p-float-label">
+                    <input type="text" id="address_line2" class="p-inputtext-sm" pInputText formControlName="address_line2"
+                           placeholder="Enter address line 2 (optional)" [style]="{ width: '100%' }" [readOnly]="addressLine2Readonly"
+                           pAutoFocus [autofocus]="!addressLine2Readonly"/>
+                    <label for="address_line2">Address line 2 (optional)</label>
+                  </span>
+                <button *ngIf="addressLine2Readonly" type="button" pButton pRipple icon="pi pi-pencil"
+                        (click)="onAddressLine2Edit()"></button>
+                <button *ngIf="!addressLine2Readonly" type="button" [hidden]="!addressLine2Readonly" pButton class="p-button-success"
+                        pRipple icon="pi pi-check" (click)="onAddressLine2Update()"></button>
+                <button *ngIf="!addressLine2Readonly" type="button" hidden="hidden" pButton class="p-button-danger" pRipple
+                        icon="pi pi-times" (click)="onAddressLine2Cancel()"></button>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="p-inputgroup">
+                  <span class="p-float-label">
+                    <input type="text" id="postal_town" class="p-inputtext-sm" pInputText formControlName="postal_town"
+                           placeholder="Enter postal town" [style]="{ width: '100%' }" [readOnly]="postalTownReadonly" pAutoFocus
+                           [autofocus]="!postalTownReadonly"/>
+                    <label for="postal_town">Postal town</label>
+                  </span>
+                <button *ngIf="postalTownReadonly" type="button" pButton pRipple icon="pi pi-pencil"
+                        (click)="onPostalTownEdit()"></button>
+                <button *ngIf="!postalTownReadonly" type="button" [hidden]="!postalTownReadonly" pButton class="p-button-success"
+                        pRipple icon="pi pi-check" (click)="onPostalTownUpdate()"></button>
+                <button *ngIf="!postalTownReadonly" type="button" hidden="hidden" pButton class="p-button-danger" pRipple
+                        icon="pi pi-times" (click)="onPostalTownCancel()"></button>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="p-inputgroup">
+                  <span class="p-float-label">
+                    <p-dropdown
+                      inputId="exam_code"
+                      class="p-inputtext-sm"
+                      [style]="{ width: '100%', 'border-top-right-radius': 0, 'border-bottom-right-radius': 0 }"
+                      [options]="districts"
+                      optionLabel="district_name"
+                      optionValue="district_number"
+                      placeholder="Select institute situated district"
+                      formControlName="district"
+                      [readonly]="districtReadonly">
+                    </p-dropdown>
+                    <label>Institute situated district</label>
+                  </span>
+                <button *ngIf="districtReadonly" type="button" pButton pRipple icon="pi pi-pencil"
+                        (click)="onDistrictEdit()"></button>
+                <button *ngIf="!districtReadonly" type="button" [hidden]="!districtReadonly" pButton class="p-button-success"
+                        pRipple icon="pi pi-check" (click)="onDistrictUpdate()"></button>
+                <button *ngIf="!districtReadonly" type="button" hidden="hidden" pButton class="p-button-danger" pRipple
+                        icon="pi pi-times" (click)="onDistrictCancel()"></button>
+              </div>
+            </div>
+            <div class="col-12 mt-4 text-center space-x-4">
+              <button
+                pButton
+                type="button"
+                label="Back"
+                class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised p-button-text"
+                pRipple
+                routerLink="/institutes">
+              </button>
+              <button
+                pButton
+                type="submit"
+                label="Update"
+                class="p-button-sm w-1/4 md:w-8rem text-sm p-button-raised"
+                pRipple
+                [disabled]="instituteInfoForm.invalid || !onReadonlyFieldsValidation()">
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
